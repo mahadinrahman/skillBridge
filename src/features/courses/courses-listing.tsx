@@ -151,7 +151,7 @@ export function CoursesListing() {
 
       {data && data.courses.length > 0 && (
         <>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {data.courses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}

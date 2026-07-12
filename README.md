@@ -12,7 +12,7 @@ SkillBridge aims to simplify online education by providing a modern course marke
 
 ## 🔗 Live Demo
 
-**Live Website:** https://your-live-site.vercel.app
+**Live Website:** https://skill-bridge-nine-eosin.vercel.app/
 
 
 ---

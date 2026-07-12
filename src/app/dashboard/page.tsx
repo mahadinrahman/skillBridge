@@ -69,7 +69,7 @@ export default async function DashboardPage() {
       <div>
         <h2 className="mb-6 text-xl font-semibold">My Enrolled Courses</h2>
         {enrolledCourses.length > 0 ? (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
             {enrolledCourses.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}
