@@ -14,7 +14,6 @@ SkillBridge aims to simplify online education by providing a modern course marke
 
 **Live Website:** https://your-live-site.vercel.app
 
-**GitHub Repository:** https://github.com/your-username/skillbridge
 
 ---
 
@@ -101,65 +100,7 @@ SkillBridge aims to simplify online education by providing a modern course marke
 
 ---
 
-## Installation
 
-Clone the repository
-
-```bash
-git clone https://github.com/your-username/skillbridge.git
-```
-
-Install dependencies
-
-```bash
-npm install
-```
-
----
-
-## Environment Variables
-
-Create a `.env.local` file and add:
-
-```env
-MONGODB_URI=mongodb://localhost:27017/skillbridge
-
-BETTER_AUTH_SECRET=your-secret-key
-
-BETTER_AUTH_URL=http://localhost:3000
-
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
-
-Generate a Better Auth secret
-
-```bash
-openssl rand -base64 32
-```
-
----
-
-## Seed Sample Data
-
-```bash
-npm run seed
-```
-
----
-
-## Run the Development Server
-
-```bash
-npm run dev
-```
-
-Visit:
-
-```
-http://localhost:3000
-```
-
----
 
 # 👥 User Roles
 
@@ -184,49 +125,7 @@ http://localhost:3000
 
 ---
 
-# 📂 Project Structure
 
-```
-src/
-├── app/              # Next.js App Router pages & API routes
-├── auth/             # Authentication helpers
-├── components/
-│   ├── ui/
-│   ├── layout/
-│   ├── home/
-│   └── courses/
-├── features/
-├── hooks/
-├── lib/
-├── services/
-└── types/
-```
-
----
-
-# 📡 API Overview
-
-| Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET/POST | /api/auth/[...all] | Better Auth handlers |
-| GET/POST | /api/courses | Get/Create courses |
-| GET/DELETE | /api/courses/[id] | Course details/Delete |
-| GET/POST | /api/enrollments | User enrollments |
-| GET | /api/admin/stats | Dashboard statistics |
-
----
-
-# 📜 Available Scripts
-
-| Command | Description |
-|---------|-------------|
-| npm run dev | Start development server |
-| npm run build | Production build |
-| npm run start | Start production server |
-| npm run lint | Run ESLint |
-| npm run seed | Seed sample courses |
-
----
 
 # 👨‍💻 Author
 
