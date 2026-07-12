@@ -5,7 +5,7 @@ import { WhyChooseUs } from "@/components/home/why-choose-us";
 import { StatisticsSection } from "@/components/home/statistics-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
 import { FAQSection } from "@/components/home/faq-section";
-import { NewsletterSection } from "@/components/home/newsletter-section";
+import { CTASection } from "@/components/home/cta-section";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +19,7 @@ export default function HomePage() {
       <StatisticsSection />
       <TestimonialsSection />
       <FAQSection />
-      <NewsletterSection />
+      <CTASection />
     </>
   );
 }
