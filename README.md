@@ -1,115 +1,239 @@
-# SkillBridge
+# 📚 SkillBridge – Full Stack Course Marketplace
 
-A production-ready full-stack course marketplace built with **Next.js 16**, **React 19**, **TypeScript**, **MongoDB**, and **Better Auth**.
+SkillBridge is a comprehensive full-stack online learning platform designed to connect learners with high-quality educational content. Users can explore courses, enroll in programs, and manage their learning journey, while administrators oversee course management and platform analytics. The project demonstrates modern full-stack development using Next.js, TypeScript, MongoDB, and Better Auth.
 
-## Features
+---
 
-- **Authentication** — Email/password registration, login, logout, session management, and role-based access (Admin / User)
-- **Public Pages** — Landing page, courses catalog, course details, about, contact, and 404
-- **User Dashboard** — Profile and enrolled courses
-- **Admin Dashboard** — Statistics, Recharts analytics, course management (add/delete)
-- **Course Listing** — Search, category/level filters, price sorting, pagination, skeleton loaders
-- **Modern UI** — Tailwind CSS, shadcn/ui components, Framer Motion animations, dark mode
+# 🎯 Purpose of the Project
 
-## Tech Stack
+SkillBridge aims to simplify online education by providing a modern course marketplace where students can discover and enroll in courses with ease. From a technical perspective, the project showcases authentication, role-based authorization, dynamic course management, responsive UI design, and real-time dashboard analytics using a production-ready Next.js architecture.
 
-| Layer | Technologies |
-|-------|-------------|
-| Frontend | Next.js 16 App Router, React 19, TypeScript, Tailwind CSS, shadcn/ui, Framer Motion, Recharts, TanStack Query, React Hook Form, Zod |
-| Backend | Next.js Route Handlers, MongoDB, Better Auth |
+---
 
-## Getting Started
+## 🔗 Live Demo
 
-### Prerequisites
+**Live Website:** https://your-live-site.vercel.app
+
+**GitHub Repository:** https://github.com/your-username/skillbridge
+
+---
+
+# ✨ Key Features
+
+## 👤 Authentication & Authorization
+
+- Secure Email/Password authentication powered by Better Auth.
+- Session management with persistent login.
+- Role-Based Access Control (Admin & User).
+- Automatic admin assignment for the first registered user.
+
+---
+
+## 📚 Course Marketplace
+
+- Browse all available courses.
+- Powerful search functionality.
+- Category and difficulty level filtering.
+- Price sorting.
+- Pagination for better performance.
+- Responsive course detail pages.
+- Skeleton loaders for smooth loading experience.
+
+---
+
+## 👨‍🎓 User Dashboard
+
+- Personal profile management.
+- View enrolled courses.
+- Track learning progress through dashboard.
+
+---
+
+## 👨‍💼 Admin Dashboard
+
+- Platform statistics dashboard.
+- Course management system.
+- Add new courses.
+- Delete existing courses.
+- Interactive analytics using Recharts.
+
+---
+
+## 🎨 UI & User Experience
+
+- Modern responsive interface.
+- Built with Tailwind CSS and shadcn/ui.
+- Dark & Light mode support.
+- Smooth animations powered by Framer Motion.
+- Optimized loading experience with skeleton components.
+
+---
+
+# 🛠 Technologies & Packages Used
+
+## Frontend
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
+- TanStack Query
+- React Hook Form
+- Zod
+- Recharts
+
+## Backend
+
+- Next.js Route Handlers
+- MongoDB
+- Better Auth
+
+---
+
+# 🚀 Getting Started
+
+## Prerequisites
 
 - Node.js 18+
-- MongoDB (local or Atlas)
+- MongoDB Atlas (or Local MongoDB)
 
-### Setup
+---
 
-1. **Clone and install dependencies**
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/your-username/skillbridge.git
+```
+
+Install dependencies
 
 ```bash
 npm install
 ```
 
-2. **Configure environment variables**
+---
 
-```bash
-cp .env.example .env.local
-```
+## Environment Variables
 
-Edit `.env.local`:
+Create a `.env.local` file and add:
 
 ```env
 MONGODB_URI=mongodb://localhost:27017/skillbridge
-BETTER_AUTH_SECRET=your-secret-key-at-least-32-characters
+
+BETTER_AUTH_SECRET=your-secret-key
+
 BETTER_AUTH_URL=http://localhost:3000
+
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-Generate a secret:
+Generate a Better Auth secret
 
 ```bash
 openssl rand -base64 32
 ```
 
-3. **Seed sample courses**
+---
+
+## Seed Sample Data
 
 ```bash
 npm run seed
 ```
 
-4. **Start the development server**
+---
+
+## Run the Development Server
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Visit:
 
-### First User = Admin
+```
+http://localhost:3000
+```
 
-The first registered user is automatically assigned the **admin** role. Subsequent users receive the **user** role.
+---
 
-## Project Structure
+# 👥 User Roles
+
+## 👨‍🎓 User
+
+- Register & Login
+- Browse courses
+- Search & filter courses
+- Enroll in courses
+- View enrolled courses
+- Manage personal profile
+
+---
+
+## 👨‍💼 Admin
+
+- Manage all courses
+- Add new courses
+- Delete courses
+- Monitor platform statistics
+- View analytics dashboard
+
+---
+
+# 📂 Project Structure
 
 ```
 src/
 ├── app/              # Next.js App Router pages & API routes
-├── auth/             # Server-side session helpers
-├── components/       # Reusable UI components
-│   ├── ui/           # shadcn/ui primitives
-│   ├── layout/       # Navbar, footer, theme toggle
-│   ├── home/         # Landing page sections
-│   └── courses/      # Course cards & skeletons
-├── features/         # Feature-specific client components
-├── hooks/            # Custom React hooks
-├── lib/              # Auth, MongoDB, utilities
-├── services/         # Database service layer
-└── types/            # TypeScript type definitions
+├── auth/             # Authentication helpers
+├── components/
+│   ├── ui/
+│   ├── layout/
+│   ├── home/
+│   └── courses/
+├── features/
+├── hooks/
+├── lib/
+├── services/
+└── types/
 ```
 
-## API Routes
+---
+
+# 📡 API Overview
 
 | Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET/POST | `/api/auth/[...all]` | Better Auth handlers |
-| GET/POST | `/api/courses` | List/create courses |
-| GET/DELETE | `/api/courses/[id]` | Get/delete course |
-| GET/POST | `/api/enrollments` | User enrollments |
-| GET | `/api/admin/stats` | Admin dashboard statistics |
+|---------|----------|-------------|
+| GET/POST | /api/auth/[...all] | Better Auth handlers |
+| GET/POST | /api/courses | Get/Create courses |
+| GET/DELETE | /api/courses/[id] | Course details/Delete |
+| GET/POST | /api/enrollments | User enrollments |
+| GET | /api/admin/stats | Dashboard statistics |
 
-## Scripts
+---
+
+# 📜 Available Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
-| `npm run seed` | Seed sample courses |
+| npm run dev | Start development server |
+| npm run build | Production build |
+| npm run start | Start production server |
+| npm run lint | Run ESLint |
+| npm run seed | Seed sample courses |
 
-## License
+---
 
-MIT
+# 👨‍💻 Author
+
+**Mahadin Rahman**
+
+Frontend Developer
+
+---
+
+⭐ If you like this project, consider giving it a star on GitHub!
