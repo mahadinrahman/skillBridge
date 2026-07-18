@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
+import { useSession } from "@/lib/auth-client";
 import { Search } from "lucide-react";
 import { useCourses } from "@/hooks/use-courses";
 import { CourseCard } from "@/components/courses/course-card";
@@ -22,6 +23,7 @@ import type { CoursesQueryParams } from "@/types";
 export function CoursesListing() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const category = searchParams.get("category") || "";
@@ -53,6 +55,16 @@ export function CoursesListing() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     updateParams({ search, page: "1" });
+    if (search.trim() && session) {
+      fetch("/api/interactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "search",
+          metadata: { query: search },
+        }),
+      }).catch(console.error);
+    }
   };
 
   return (

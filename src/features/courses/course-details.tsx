@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CourseCard } from "@/components/courses/course-card";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, cn } from "@/lib/utils";
 
 interface CourseDetailsProps {
   course: CourseWithId;
@@ -35,6 +35,67 @@ export function CourseDetails({
   const { data: session } = useSession();
   const [enrolling, setEnrolling] = useState(false);
   const [enrolled, setEnrolled] = useState(isEnrolled);
+  const [completed, setCompleted] = useState(false);
+  const [completing, setCompleting] = useState(false);
+  const [userRating, setUserRating] = useState<number | null>(null);
+  const [ratingHover, setRatingHover] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (session) {
+      // Record course view interaction
+      fetch("/api/interactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ courseId: course.id, type: "view" }),
+      }).catch(console.error);
+    }
+  }, [course.id, session]);
+
+  const handleRate = async (rating: number) => {
+    setUserRating(rating);
+    try {
+      const res = await fetch("/api/interactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          courseId: course.id,
+          type: "rate",
+          metadata: { rating },
+        }),
+      });
+      if (res.ok) {
+        toast.success(`You rated this course ${rating} stars!`);
+      } else {
+        toast.error("Failed to submit rating.");
+      }
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
+  const handleComplete = async () => {
+    setCompleting(true);
+    try {
+      const res = await fetch("/api/interactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          courseId: course.id,
+          type: "complete",
+        }),
+      });
+      if (res.ok) {
+        setCompleted(true);
+        toast.success("Congratulations! Course marked as completed.");
+      } else {
+        toast.error("Failed to mark course as completed.");
+      }
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setCompleting(false);
+    }
+  };
 
   const handleEnroll = async () => {
     if (!session) {
@@ -137,9 +198,51 @@ export function CourseDetails({
               </div>
 
               {enrolled ? (
-                <Button className="w-full" variant="secondary" disabled>
-                  Enrolled
-                </Button>
+                <div className="space-y-4">
+                  <Button className="w-full" variant="secondary" disabled>
+                    Enrolled
+                  </Button>
+                  
+                  {completed ? (
+                    <div className="text-center text-xs text-emerald-500 font-bold bg-emerald-500/10 py-2.5 rounded-xl border border-emerald-500/20">
+                      ✓ Course Completed
+                    </div>
+                  ) : (
+                    <Button
+                      className="w-full rounded-xl"
+                      variant="outline"
+                      onClick={handleComplete}
+                      disabled={completing}
+                    >
+                      {completing ? "Updating..." : "Mark as Completed"}
+                    </Button>
+                  )}
+                  
+                  <div className="pt-4 border-t border-border/40 space-y-2">
+                    <p className="text-xs text-center font-bold text-muted-foreground uppercase tracking-wider">Rate this Course</p>
+                    <div className="flex justify-center gap-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => handleRate(star)}
+                          onMouseEnter={() => setRatingHover(star)}
+                          onMouseLeave={() => setRatingHover(null)}
+                          className="transition-transform duration-150 hover:scale-115 active:scale-95"
+                        >
+                          <Star
+                            className={cn(
+                              "h-7 w-7 transition-colors",
+                              (ratingHover !== null ? star <= ratingHover : star <= (userRating || 0))
+                                ? "fill-amber-400 text-amber-500 stroke-amber-500"
+                                : "text-muted-foreground stroke-muted-foreground stroke-1"
+                            )}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <Button
                   className="w-full"

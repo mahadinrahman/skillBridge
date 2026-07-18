@@ -64,3 +64,79 @@ export interface PaginatedCourses {
   page: number;
   totalPages: number;
 }
+
+export interface UserPreferences {
+  _id?: ObjectId | string;
+  userId: string;
+  favoriteCategories: string[];
+  preferredDifficulty: "Beginner" | "Intermediate" | "Advanced" | "All";
+  learningGoals: string;
+  updatedAt: Date;
+}
+
+export interface CourseView {
+  _id?: ObjectId | string;
+  userId: string;
+  courseId: string;
+  viewedAt: Date;
+}
+
+export interface SearchHistory {
+  _id?: ObjectId | string;
+  userId: string;
+  query: string;
+  searchedAt: Date;
+}
+
+export interface CourseRating {
+  _id?: ObjectId | string;
+  userId: string;
+  courseId: string;
+  rating: number;
+  ratedAt: Date;
+}
+
+export interface CompletedCourse {
+  _id?: ObjectId | string;
+  userId: string;
+  courseId: string;
+  completedAt: Date;
+}
+
+export interface RecommendationLog {
+  _id?: ObjectId | string;
+  userId: string;
+  recommendedCourses: {
+    courseId: string;
+    confidenceScore: number;
+    reason: string;
+  }[];
+  filters?: {
+    category?: string;
+    level?: string;
+    maxPrice?: number;
+    maxDuration?: number;
+  };
+  createdAt: Date;
+}
+
+export interface RecommendationFeedback {
+  _id?: ObjectId | string;
+  userId: string;
+  courseId: string;
+  feedbackType: "not_interested" | "more_like_this" | "click";
+  createdAt: Date;
+}
+
+export interface RecommendationItem extends CourseWithId {
+  confidenceScore: number;
+  recommendationReason: string;
+}
+
+export interface PaginatedRecommendations {
+  recommendations: RecommendationItem[];
+  total: number;
+  page: number;
+  totalPages: number;
+}
+

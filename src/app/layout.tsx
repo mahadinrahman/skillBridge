@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
+import { FloatingChatbot } from "@/components/chat/floating-chatbot";
 import { APP_NAME } from "@/lib/constants";
 import "./globals.css";
 
@@ -50,9 +51,11 @@ export default function RootLayout({
               <Footer />
             </div>
             <ToastProvider />
+            <FloatingChatbot />
           </QueryProvider>
         </ThemeProvider>
       </body>
     </html>
   );
 }
+

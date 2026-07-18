@@ -24,8 +24,7 @@ export const NAV_LINKS = {
   user: [
     { href: "/", label: "Home" },
     { href: "/courses", label: "Courses" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/dashboard/recommendations", label: "AI Recommendations" },
     { href: "/dashboard", label: "Dashboard" },
     { href: "/dashboard/profile", label: "Profile" },
   ],
