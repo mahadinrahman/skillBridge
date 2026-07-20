@@ -38,7 +38,7 @@ export default function RegisterPage() {
     try {
       await signIn.social({
         provider: "google",
-        callbackURL: "/dashboard",
+        callbackURL: "/",
       });
     } catch {
       toast.error("Something went wrong with Google Sign In.");
@@ -173,7 +173,7 @@ export default function RegisterPage() {
               </>
             )}
           </Button>
-          
+
           <p className="mt-6 text-center text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link href="/login" className="text-primary hover:underline">
