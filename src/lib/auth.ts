@@ -21,6 +21,12 @@ export async function getAuthServer() {
       enabled: true,
       requireEmailVerification: false,
     },
+    socialProviders: {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID || process.env.Google_CLIENT_ID || "",
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      },
+    },
     user: {
       additionalFields: {
         role: {
